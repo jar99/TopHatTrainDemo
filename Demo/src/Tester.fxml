@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DemoCTR">
+   <children>
+      <ChoiceBox fx:id="train_select" layoutX="380.0" layoutY="14.0" prefWidth="150.0" />
+      <TableView fx:id="info_table" layoutX="632.0" layoutY="21.0" prefHeight="379.0" prefWidth="265.0">
+         <columns>
+            <TableColumn fx:id="information_item" prefWidth="75.0" text="Item" />
+            <TableColumn fx:id="information_value" prefWidth="75.0" text="Value" />
+         </columns></TableView>
+      <TextField fx:id="track_grade" layoutX="100.0" layoutY="228.0" onAction="#update_track_data" />
+      <TextField fx:id="beacon_data" layoutX="417.0" layoutY="256.0" onAction="#update_beacon_data" />
+      <Label layoutX="25.0" layoutY="233.0" text="Grade" />
+      <Label layoutX="371.0" layoutY="261.0" text="Beacon" />
+      <ToggleButton fx:id="has_beacon" layoutX="362.0" layoutY="220.0" mnemonicParsing="false" onAction="#update_beacon_data" text="Has Beacon" />
+      <Label layoutX="361.0" layoutY="291.0" text="Passangers On" />
+      <TextField layoutX="363.0" layoutY="312.0" />
+      <ToggleButton layoutX="538.0" layoutY="312.0" mnemonicParsing="false" text="Is Station" />
+      <TextField layoutX="363.0" layoutY="360.0" />
+      <Label layoutX="361.0" layoutY="339.0" text="Passangers OFF" />
+      <Label layoutX="25.0" layoutY="260.0" text="Speed Limit" />
+      <TextField fx:id="track_speed_limit" layoutX="100.0" layoutY="255.0" onAction="#update_track_data" />
+      <TextField fx:id="track_speed" layoutX="100.0" layoutY="291.0" onAction="#change_track_data" />
+      <Label layoutX="25.0" layoutY="296.0" text="Rail Speed" />
+      <Label layoutX="25.0" layoutY="323.0" text="Rail Auth" />
+      <TextField fx:id="track_auth" layoutX="100.0" layoutY="318.0" onAction="#change_track_data" />
+      <TextField fx:id="mbo_auth" layoutX="101.0" layoutY="400.0" onAction="#change_mbo" />
+      <Label layoutX="26.0" layoutY="405.0" text="MBO Auth" />
+      <Label layoutX="26.0" layoutY="378.0" text="MBO Speed" />
+      <TextField fx:id="mbo_speed" layoutX="101.0" layoutY="373.0" onAction="#change_mbo" />
+      <TextField fx:id="train_id" layoutX="89.0" layoutY="15.0" />
+      <Label layoutX="22.0" layoutY="20.0" text="Train ID" />
+      <CheckBox fx:id="rail_fault" layoutX="267.0" layoutY="233.0" mnemonicParsing="false" onAction="#track_rail_fault" text="Rail Fault" />
+      <CheckBox fx:id="power_fault" layoutX="268.0" layoutY="260.0" mnemonicParsing="false" onAction="#track_power_fault" text="Power Fault" />
+      <ToggleButton fx:id="crash_train_button" layoutX="268.0" layoutY="291.0" mnemonicParsing="false" onAction="#crash_train" text="Crash Train" />
+      <Label layoutX="384.0" layoutY="56.0" text="Power" />
+      <TextField fx:id="train_ctr_power" layoutX="459.0" layoutY="51.0" onAction="#update_train_ctr" />
+      <ToggleButton fx:id="train_ctr_left" layoutX="379.0" layoutY="123.0" mnemonicParsing="false" onAction="#update_train_button" text="Left Door" />
+      <ToggleButton fx:id="train_ctr_right" layoutX="488.0" layoutY="121.0" mnemonicParsing="false" onAction="#update_train_button" text="Right Door" />
+      <ToggleButton fx:id="train_ctr_inLight" layoutX="380.0" layoutY="153.0" mnemonicParsing="false" onAction="#update_train_button" text="Interior Light" />
+      <ToggleButton fx:id="train_ctr_outLight" layoutX="488.0" layoutY="151.0" mnemonicParsing="false" onAction="#update_train_button" text="Exterior Light" />
+      <ToggleButton fx:id="train_ctr_service" layoutX="377.0" layoutY="89.0" mnemonicParsing="false" onAction="#update_train_button" text="Service Brake" />
+      <ToggleButton fx:id="train_ctr_emergency" layoutX="488.0" layoutY="89.0" mnemonicParsing="false" onAction="#update_train_button" text="Emergency Brake" />
+      <Label layoutX="19.0" layoutY="48.0" text="S Speed" />
+      <TextField fx:id="train_sspeed" layoutX="89.0" layoutY="43.0" />
+      <Label layoutX="18.0" layoutY="80.0" text="S Passanger" />
+      <TextField fx:id="train_spassanger" layoutX="89.0" layoutY="75.0" />
+      <Button layoutX="269.0" layoutY="15.0" mnemonicParsing="false" onAction="#make_train" text="Make Train" />
+      <Label layoutX="22.0" layoutY="107.0" text="Clock" />
+      <Label fx:id="time" layoutX="65.0" layoutY="107.0" text="time" />
+      <TextField fx:id="time_scale" layoutX="89.0" layoutY="128.0" />
+      <Label layoutX="22.0" layoutY="133.0" text="Time Scale" />
+      <CheckBox fx:id="time_pause" layoutX="23.0" layoutY="155.0" mnemonicParsing="false" onAction="#pause" text="Pause" />
+      <Button layoutX="146.0" layoutY="160.0" mnemonicParsing="false" onAction="#time_set" text="Set Time Scale" />
+      <Button layoutX="269.0" layoutY="51.0" mnemonicParsing="false" onAction="#remove_train" text="Remove Train" />
+      <Button layoutX="25.0" layoutY="347.0" mnemonicParsing="false" onAction="#send_mbo_data" text="Send Data" />
+      <Label layoutX="360.0" layoutY="397.0" text="Total Passangers" />
+      <Label fx:id="passangers" layoutX="475.0" layoutY="397.0" text="passangers" />
+   </children>
+</AnchorPane>
