@@ -18,9 +18,9 @@
       <Label layoutX="371.0" layoutY="261.0" text="Beacon" />
       <ToggleButton fx:id="has_beacon" layoutX="362.0" layoutY="220.0" mnemonicParsing="false" onAction="#update_beacon_data" text="Has Beacon" />
       <Label layoutX="361.0" layoutY="291.0" text="Passangers On" />
-      <TextField layoutX="363.0" layoutY="312.0" />
-      <ToggleButton layoutX="538.0" layoutY="312.0" mnemonicParsing="false" text="Is Station" />
-      <TextField layoutX="363.0" layoutY="360.0" />
+      <TextField fx:id="track_passanger_on" layoutX="363.0" layoutY="312.0" onAction="#set_passangers_on" />
+      <ToggleButton fx:id="track_is_station" layoutX="538.0" layoutY="312.0" mnemonicParsing="false" onAction="#track_set_station" text="Is Station" />
+      <TextField fx:id="track_passanger_off" layoutX="363.0" layoutY="360.0" onAction="#set_passangers_off" />
       <Label layoutX="361.0" layoutY="339.0" text="Passangers OFF" />
       <Label layoutX="25.0" layoutY="260.0" text="Speed Limit" />
       <TextField fx:id="track_speed_limit" layoutX="100.0" layoutY="255.0" onAction="#update_track_data" />

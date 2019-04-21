@@ -1,6 +1,7 @@
 import java.util.concurrent.CountDownLatch;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,17 +19,18 @@ public class TestUI extends Application {
 	private void makeWindow(String path, String title, int width, int height) {
 		try {
 			Stage trnModStage = new Stage();
-			trnModStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			    @Override
-			    public void handle(WindowEvent event) {
-			        try {
-						stop();
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-			    }
-			});
+//			Code to close all windows if one window closese
+//			trnModStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+//			    @Override
+//			    public void handle(WindowEvent event) {
+//			        try {
+//			        	Platform.exit();
+//					} catch (Exception e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//			    }
+//			});
 			
 			
 			Parent trnModRoot = FXMLLoader.load(getClass().getResource(path));
@@ -46,9 +48,6 @@ public class TestUI extends Application {
 		makeWindow("./application/TrainModel/TrainModel.fxml", "Train Model", 400, 400);
 		makeWindow("./Tester.fxml", "Train Tester", 400, 400);
 			
-
-
-		
 	}
 
 	public static TestUI waitForUITest() {
@@ -70,6 +69,7 @@ public class TestUI extends Application {
 	}
 
 	public static void main(String[] args) {
+		System.out.println("Starting from TestUI");
 		Application.launch(args);
 		
 	}

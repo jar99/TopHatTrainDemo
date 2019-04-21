@@ -5,6 +5,7 @@ import application.ClockSingleton;
 import application.TrackModel.SwitchStateException;
 import application.TrainModel.TrainInterface;
 import application.TrainModel.TrainModelSingleton;
+import application.TrainModel.UI.Converters;
 import application.TrainModel.UI.TableRow;
 import javafx.animation.AnimationTimer;
 import javafx.beans.value.ChangeListener;
@@ -20,6 +21,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 public class DemoCTR implements Initializable {
 
@@ -42,7 +46,6 @@ public class DemoCTR implements Initializable {
 	@FXML
     TableColumn<TableRow, String> information_value;
     
-    
     @FXML
     Label time;
     
@@ -51,9 +54,7 @@ public class DemoCTR implements Initializable {
     
     @FXML
     CheckBox time_pause;
-    
-    
-    
+     
     @FXML
     TextField train_id;
     
@@ -118,6 +119,18 @@ public class DemoCTR implements Initializable {
     @FXML
     CheckBox power_fault;
     
+    @FXML
+    TextField track_passanger_on;
+    
+    @FXML
+    TextField track_passanger_off;
+    
+    @FXML
+    Label passangers;
+    
+    @FXML
+    ToggleButton track_is_station;
+    
     MboTestModel mbo = new MboTestModel();
     
     @FXML
@@ -125,8 +138,14 @@ public class DemoCTR implements Initializable {
     
     @FXML
     TextField mbo_speed;
-    
-    
+
+	private TableRow<Integer> passangersDelta;
+
+	private TableRow<String> trainid;
+
+	private TableRow<Integer> passangersOn;
+
+	private TableRow<Integer> passangersOff;
     
     @FXML
     private void pause(ActionEvent e){
@@ -210,8 +229,13 @@ public class DemoCTR implements Initializable {
 	}
 
 	private void setupTable() {
+		trainid = new TableRow<String>("Train ID", "N/A"); 
+		passangersDelta = new TableRow<Integer>("Passangers Diff", 0, (a) -> Converters.PassangerFormat(a));
+		passangersOn = new TableRow<Integer>("Passangers On", 0, (a) -> Converters.PassangerFormat(a));
+		passangersOff = new TableRow<Integer>("Passangers Off", 0, (a) -> Converters.PassangerFormat(a));
     	
-    	
+		
+		info_table.getItems().addAll(trainid, passangersDelta, passangersOn, passangersOff);
     }
     
 	@FXML
@@ -302,7 +326,6 @@ public class DemoCTR implements Initializable {
 		track.crashTrain(train.getID(), !crash_train_button.isSelected());
 	}
 	
-	
 	@FXML
     private void update_train_ctr(ActionEvent e) {
 		if(train == null) return;
@@ -310,16 +333,12 @@ public class DemoCTR implements Initializable {
 		if(!power_s.isEmpty()) {
 			double power = Double.parseDouble(power_s);
 			train.setPower(power);
-		}
-		
-		
-		
+		}	
 	}
 	
 	@FXML
     private void update_train_button(ActionEvent e) {
 		if(train == null) return;
-		System.out.println("Update buttons.");
 		if(train.getLeftDoorState() != train_ctr_left.isSelected()) train.toggleLeftDoors();
 		if(train.getRightDoorState() != train_ctr_right.isSelected()) train.toggleRightDoors();
 		if(train.getInterierLightState() != train_ctr_inLight.isSelected()) train.toggleInterierLight();
@@ -335,7 +354,30 @@ public class DemoCTR implements Initializable {
 		
 	}
 	
+	@FXML
+	private void track_set_station(ActionEvent e){
+		track.setStation(track_is_station.isSelected());
+	}
 	
+	@FXML
+	private void set_passangers_on(ActionEvent e){
+		String passangers_on = track_passanger_on.getText();
+		if(!passangers_on.isEmpty()) {
+			int passangers = Integer.parseInt(passangers_on);
+			track_passanger_on.clear();
+			track.addPassangersOn(passangers);
+		}
+	}
+	
+	@FXML
+	private void set_passangers_off(ActionEvent e){
+		String passangers_off = track_passanger_off.getText();
+		if(!passangers_off.isEmpty()) {
+			int passangers = Integer.parseInt(passangers_off);
+			track_passanger_off.clear();
+			track.addPassangersOff(passangers);
+		}
+	}
 	
     private void checkNumber(TextField textField) {
     	textField.textProperty().addListener(new ChangeListener<String>() {
@@ -378,6 +420,12 @@ public class DemoCTR implements Initializable {
 		
 		checkDecimal(train_ctr_power);
 		
+		information_item.setCellValueFactory(new PropertyValueFactory<TableRow, String>("name"));
+ 		information_value.setCellValueFactory(new Callback<CellDataFeatures<TableRow, String> ,ObservableValue<String>>(){
+ 			public ObservableValue<String> call(CellDataFeatures<TableRow, String> c) {
+ 		        return c.getValue().getValue();
+ 		    }
+ 		});
 		
 		setupTable();
 		
@@ -396,11 +444,25 @@ public class DemoCTR implements Initializable {
 	 	    .addListener( (ObservableValue<? extends TrainInterface> observable, TrainInterface oldValue, TrainInterface newValue) -> selectTrain(oldValue, newValue) );
 	}
 	
+	private int totalPassangers;
+	
 	private void update() {
     	time.setText(clock.getCurrentTimeString());
+    	
+
+		if(info_table.isVisible()) {		
+			if(train != null) trainid.update(train.toString());
+			else trainid.update("N/A");		
+			passangersDelta.update(track.getPassangerDiff());
+			passangersOn.update(track.getPassangerOn());
+			passangersOff.update(track.getPassangerOff());		
+		}
+    	
     	if(train == null) return;
     	
 		train_ctr_emergency.setSelected(train.getEmergencyBrake());
+		passangers.setText(String.format("%d", track.getPassangerDiff()));
+		
     	
     }
 	

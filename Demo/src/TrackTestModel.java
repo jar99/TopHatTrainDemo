@@ -9,11 +9,21 @@ public class TrackTestModel implements TrackModelInterface {
 
 	private double speed, speedLimit, grade, blockLength;
 	private int auth;
-	private boolean hasPower = true, isGreen, hasBeacon, isUnderGround, isStation, hasLight;
-	private String beaconData;
+	private int onPassengers;
+	private int offPassengers;
+	private int diffPassengers;
+	
+	private boolean hasPower = true;
+	private boolean isGreen;
+	private boolean hasBeacon;
+	private boolean isUnderGround;
+	private boolean isStation;
+	private boolean hasLight;
 	private boolean hasRailFault = false;
+	private String beaconData;
 	
 	Hashtable<Integer, TrackTrainTest> trainS = new Hashtable<>();
+	
 
 	@Override
 	public void createTrain(String lineName, int trainID) throws SwitchStateException {
@@ -58,8 +68,42 @@ public class TrackTestModel implements TrackModelInterface {
 
 	@Override
 	public int stationPassengerExchange(int trainID, int currentPassengers, int capacity) {
-		// TODO Auto-generated method stub
-		return 0;
+		// Need to return the new value of passangers
+		int offSum = currentPassengers-offPassengers;
+		if(offSum >= 0) {
+			currentPassengers-=offPassengers;
+			
+			diffPassengers-=offPassengers;
+			offPassengers = 0;
+		}else {
+			offPassengers =-offSum;	
+			
+			diffPassengers-=offSum;
+			currentPassengers = 0;
+		}
+		System.out.println("Train passangers " + currentPassengers + " " + capacity + " off " + offSum + " " + offPassengers + " ");
+		
+		int onSum = currentPassengers+onPassengers;
+		if(onSum <= capacity) {
+			currentPassengers+=onPassengers;
+			
+			diffPassengers+=onSum;
+			onPassengers = 0;
+		} else {
+			int exchange = onSum-capacity;
+			currentPassengers += exchange;
+			
+			diffPassengers+=exchange;
+			onPassengers =- exchange;	
+		}
+		
+		System.out.println("Train passangers " + currentPassengers + " " + capacity + " on " + onSum + " " + onPassengers + " ");
+		
+		return currentPassengers;
+	}
+	
+	public int getPassangerDiff() {
+		return diffPassengers;
 	}
 
 	@Override
@@ -176,6 +220,18 @@ public class TrackTestModel implements TrackModelInterface {
 		this.hasPower = value;	
 	}
 	
+	public void setStation(boolean value) {	
+		this.isStation = value;
+	}
+	
+	public void addPassangersOn(int passangers) {
+		this.onPassengers += passangers;	
+	}
+	
+	public void addPassangersOff(int passangers) {
+		this.offPassengers += passangers;	
+	}
+	
 	@Override
 	public boolean getSwitchState(String lineName, int switchID) {return false;}
 	@Override
@@ -195,5 +251,17 @@ public class TrackTestModel implements TrackModelInterface {
 	@Override
 	public void setCrossing(String lineName, int blockID, boolean crossingOn) {}
 
+	public int getPassangerOn() {
+		return onPassengers;
+	}
+	
+	public int getPassangerOff() {
+		return offPassengers;
+	}
 
+	@Override
+	public int getTotalBoarders(String lineName) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
