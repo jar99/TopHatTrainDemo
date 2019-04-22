@@ -31,23 +31,23 @@ public class TestUI extends Application {
 //					}
 //			    }
 //			});
-			
-			
+
 			Parent trnModRoot = FXMLLoader.load(getClass().getResource(path));
 			trnModStage.setTitle(title);
-			Scene trnModScene = new Scene(trnModRoot, width, height); // NOTE: Change last two ints to make window bigger
+			Scene trnModScene = new Scene(trnModRoot, width, height); // NOTE: Change last two ints to make window
+																		// bigger
 			trnModStage.setScene(trnModScene);
 			trnModStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void start(Stage ctcStage) {
 		makeWindow("./application/TrainModel/TrainModel.fxml", "Train Model", 400, 400);
 		makeWindow("./Tester.fxml", "Train Tester", 400, 400);
-			
+
 	}
 
 	public static TestUI waitForUITest() {
@@ -71,6 +71,6 @@ public class TestUI extends Application {
 	public static void main(String[] args) {
 		System.out.println("Starting from TestUI");
 		Application.launch(args);
-		
+
 	}
 }

@@ -1,18 +1,18 @@
 
 public class TrackTrainTest {
-	
+
 	int id;
 	double displacement, x, y;
 	boolean hasCrashed = false;
-	
-	TrackTrainTest(int id){
+
+	TrackTrainTest(int id) {
 		this.id = id;
 	}
-	
-	boolean hasCrashed(){
+
+	boolean hasCrashed() {
 		return hasCrashed;
 	}
-	
+
 	void setCrash(boolean value) {
 		hasCrashed = value;
 	}
@@ -26,11 +26,9 @@ public class TrackTrainTest {
 	public double getX() {
 		return x;
 	}
-	
+
 	public double getY() {
 		return y;
 	}
-	
-	
 
 }

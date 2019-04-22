@@ -60,5 +60,7 @@
       <Button layoutX="25.0" layoutY="347.0" mnemonicParsing="false" onAction="#send_mbo_data" text="Send Data" />
       <Label layoutX="360.0" layoutY="397.0" text="Total Passangers" />
       <Label fx:id="passangers" layoutX="475.0" layoutY="397.0" text="passangers" />
+      <TextField fx:id="train_ctr_temperature" layoutX="463.0" layoutY="187.0" onAction="#update_train_temperature" />
+      <Label layoutX="383.0" layoutY="192.0" text="Temperature" />
    </children>
 </AnchorPane>
