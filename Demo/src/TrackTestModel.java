@@ -4,6 +4,7 @@ import application.TrackModel.SwitchStateException;
 import application.TrackModel.TrackCircuitFailureException;
 import application.TrackModel.TrackModelInterface;
 import application.TrackModel.TrainCrashedException;
+import application.TrainModel.UI.TrainLogger;
 
 public class TrackTestModel implements TrackModelInterface {
 
@@ -91,7 +92,7 @@ public class TrackTestModel implements TrackModelInterface {
 			offPassengers = 0;
 
 		}
-		System.out.println("Train passangers " + currentPassengers + " " + capacity + " off " + offSum + " "
+		TrainLogger.infoS("Train passangers " + currentPassengers + " " + capacity + " off " + offSum + " "
 				+ offPassengers + " ");
 
 		int onSum = currentPassengers + onPassengers;
@@ -112,7 +113,7 @@ public class TrackTestModel implements TrackModelInterface {
 			currentPassengers = exchange;
 		}
 
-		System.out.println(
+		TrainLogger.infoS(
 				"Train passangers " + currentPassengers + " " + capacity + " on " + onSum + " " + onPassengers + " ");
 
 		return currentPassengers;
@@ -181,14 +182,25 @@ public class TrackTestModel implements TrackModelInterface {
 	public double getTrainSuggestedSpeed(int trainID) throws TrackCircuitFailureException {
 		if (hasRailFault)
 			throw new TrackCircuitFailureException("Track Circuit is Failing");
-		return speed;
+		if (!trainS.containsKey(trainID))
+			throw new IllegalArgumentException("Train: " + trainID + " not found");
+		
+		TrackTrainTest t = trainS.get(trainID);
+		
+		return t.getSpeed();
 	}
 
 	@Override
 	public int getTrainBlockAuthority(int trainID) throws TrackCircuitFailureException {
 		if (hasRailFault)
 			throw new TrackCircuitFailureException("Track Circuit is Failing");
-		return auth;
+		
+		if (!trainS.containsKey(trainID))
+			throw new IllegalArgumentException("Train: " + trainID + " not found");
+		
+		TrackTrainTest t = trainS.get(trainID);
+		
+		return t.getAuth();
 	}
 
 	@Override

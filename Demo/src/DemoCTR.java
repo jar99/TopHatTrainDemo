@@ -9,6 +9,7 @@ import application.TrainModel.TrainInterface;
 import application.TrainModel.TrainModelSingleton;
 import application.TrainModel.UI.Converters;
 import application.TrainModel.UI.TableRow;
+import application.TrainModel.UI.TrainLogger;
 import javafx.animation.AnimationTimer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -329,6 +330,7 @@ public class DemoCTR implements Initializable {
 			return;
 		}
 			
+		TrainLogger.infoS("DemoCTRL", "Track Speed: " + speed);
 		track.setAuth(train.getID(), auth);
 		track.setSpeed(train.getID(), speed);
 

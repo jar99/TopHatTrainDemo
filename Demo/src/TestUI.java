@@ -1,5 +1,6 @@
 import java.util.concurrent.CountDownLatch;
 
+import application.TrainModel.UI.TrainLogger;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -73,7 +74,7 @@ public class TestUI extends Application {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Starting from TestUI");
+		TrainLogger.infoS("Starting from TestUI");
 		Application.launch(args);
 
 	}

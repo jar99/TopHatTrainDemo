@@ -6,13 +6,17 @@ import java.util.concurrent.TimeUnit;
 import application.ClockSingleton;
 import application.TrainController.TrainControllerSingleton;
 import application.TrainModel.TrainModelSingleton;
+import application.TrainModel.UI.TrainLogger;
 
 public class Demo {
 
 	protected static final boolean trainControllerEnable = true;
 
 	public static void main(String[] args) {
-		System.out.println("Starting from Demo");
+		TrainLogger.enableS();
+		TrainLogger.printToConsoleS(true);
+		
+		TrainLogger.infoS("Starting from Demo");
 
 		TrainControllerSingleton 	trnCtrlSin = 	TrainControllerSingleton.getInstance();
 		
@@ -27,7 +31,7 @@ public class Demo {
 			public void run() {
 				try {
 					clock.update();
-					System.out.println("Updating at: " + clock.getCurrentTimeString());
+					TrainLogger.debugS("Clock", "Updating at: " + clock.getCurrentTimeString());
 					trnModSin.update();
 					
 					if(trainControllerEnable) trnCtrlSin.update();
@@ -40,7 +44,7 @@ public class Demo {
 		javafx.application.Application.launch(TestUI.class);
 		executorService.shutdown();
 
-		System.out.println("We are done.");
+		TrainLogger.infoS("We are done.");
 	}
 
 }
