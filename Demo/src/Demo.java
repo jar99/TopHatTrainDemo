@@ -9,10 +9,13 @@ import application.TrainModel.TrainModelSingleton;
 
 public class Demo {
 
+	protected static final boolean trainControllerEnable = true;
+
 	public static void main(String[] args) {
 		System.out.println("Starting from Demo");
 
 		TrainControllerSingleton 	trnCtrlSin = 	TrainControllerSingleton.getInstance();
+		
 		TrainModelSingleton trnModSin = TrainModelSingleton.getInstance();
 		ClockSingleton clock = ClockSingleton.getInstance();
 
@@ -26,7 +29,8 @@ public class Demo {
 					clock.update();
 					System.out.println("Updating at: " + clock.getCurrentTimeString());
 					trnModSin.update();
-					trnCtrlSin.update();
+					
+					if(trainControllerEnable) trnCtrlSin.update();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

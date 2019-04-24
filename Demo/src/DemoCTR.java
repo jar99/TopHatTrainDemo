@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 import application.ClockSingleton;
 import application.TrackModel.SwitchStateException;
 import application.TrackModel.TrackCircuitFailureException;
+import application.TrainController.TrainControllerSingleton;
 import application.TrainModel.TrainInterface;
 import application.TrainModel.TrainModelSingleton;
 import application.TrainModel.UI.Converters;
@@ -215,6 +216,14 @@ public class DemoCTR implements Initializable {
 			}
 			track.addPassangerDiff(passanger);
 			TrainInterface t = trainModSin.createTrain(trainID, passanger, speed, track, mbo);
+			
+			if(Demo.trainControllerEnable) {
+				TrainControllerSingleton trnCtrl = TrainControllerSingleton.getInstance();
+				trnCtrl.createTrain(trainID, t); // Create this method.
+			}
+			
+			t.dispatch();
+			
 			System.out.println("Adding: " + t);
 			addTrain(trainID, t);
 		}
@@ -302,9 +311,6 @@ public class DemoCTR implements Initializable {
 	private void change_track_data(ActionEvent e) {
 		System.out.println("Changed the track info");
 
-		if (train == null)
-			return;
-
 		int auth = 0;
 		String auth_s = track_auth.getText();
 		if (!auth_s.isEmpty()) {
@@ -317,6 +323,12 @@ public class DemoCTR implements Initializable {
 			speed = Double.parseDouble(speed_s);
 		}
 
+		if (train == null) {
+			track.setAuth(auth);
+			track.setSpeed(speed);
+			return;
+		}
+			
 		track.setAuth(train.getID(), auth);
 		track.setSpeed(train.getID(), speed);
 

@@ -4,6 +4,9 @@ public class TrackTrainTest {
 	int id;
 	double displacement, x, y;
 	boolean hasCrashed = false;
+	
+	int auth;
+	double speed;
 
 	TrackTrainTest(int id) {
 		this.id = id;
@@ -30,5 +33,23 @@ public class TrackTrainTest {
 	public double getY() {
 		return y;
 	}
+	
+	public void setAuth(int value) {
+		this.auth = value;
+	}
+	
+	public int getAuth() {
+		return auth;
+	}
+	
+	public void setSpeed(double value) {
+		this.speed = value;
+	}
+	
+	public double getSpeed() {
+		return speed;
+	}
+	
+	
 
 }

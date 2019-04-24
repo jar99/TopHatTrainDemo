@@ -26,7 +26,11 @@ public class TrackTestModel implements TrackModelInterface {
 
 	@Override
 	public void createTrain(String lineName, int trainID) throws SwitchStateException {
-		trainS.put(trainID, new TrackTrainTest(trainID));
+		TrackTrainTest train = new TrackTrainTest(trainID);
+		train.setAuth(auth);
+		train.setSpeed(speed);
+		trainS.put(trainID, train);
+		
 
 	}
 
@@ -191,15 +195,30 @@ public class TrackTestModel implements TrackModelInterface {
 	public boolean trainHasPower(int trainID) {
 		return hasPower;
 	}
-
-	public void setAuth(int id, int auth) {
-
+	
+	public void setAuth(int auth) {
 		this.auth = auth;
-
 	}
 
-	public void setSpeed(int id, double speed) {
+	public void setAuth(int trainID, int auth) {
+		if (!trainS.containsKey(trainID))
+			throw new IllegalArgumentException("Train: " + trainID + " not found");
+		
+		TrackTrainTest t = trainS.get(trainID);
+		t.setAuth(auth);
+		this.auth = auth;
+	}
+
+	public void setSpeed(double speed) {
 		this.speed = speed;
+	}
+	
+	public void setSpeed(int trainID, double speed) {
+		if (!trainS.containsKey(trainID))
+			throw new IllegalArgumentException("Train: " + trainID + " not found");
+		
+		TrackTrainTest t = trainS.get(trainID);
+		t.setSpeed(speed);
 	}
 
 	public void setSpeedLimit(double speedLimit) {

@@ -45,9 +45,11 @@ public class TestUI extends Application {
 
 	@Override
 	public void start(Stage ctcStage) {
-		makeWindow("./application/TrainController/TrainController.fxml", "Train Controller", 650, 500);
-		makeWindow("./application/TrainModel/TrainModel.fxml", "Train Model", 400, 400);
+	
 		makeWindow("./Tester.fxml", "Train Tester", 400, 400);
+		makeWindow("./application/TrainModel/TrainModel.fxml", "Train Model", 400, 400);
+		
+		if(Demo.trainControllerEnable) makeWindow("./application/TrainController/TrainController.fxml", "Train Controller", 650, 500);
 		
 
 	}
