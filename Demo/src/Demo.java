@@ -14,6 +14,7 @@ public class Demo {
 
 	public static void main(String[] args) {
 		TrainLogger.enableS();
+		
 		TrainLogger.printToConsoleS(true);
 		
 		TrainLogger.infoS("Starting from Demo");
