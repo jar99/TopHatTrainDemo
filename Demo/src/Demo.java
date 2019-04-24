@@ -4,6 +4,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import application.ClockSingleton;
+import application.TrainController.TrainControllerSingleton;
 import application.TrainModel.TrainModelSingleton;
 
 public class Demo {
@@ -11,6 +12,7 @@ public class Demo {
 	public static void main(String[] args) {
 		System.out.println("Starting from Demo");
 
+		TrainControllerSingleton 	trnCtrlSin = 	TrainControllerSingleton.getInstance();
 		TrainModelSingleton trnModSin = TrainModelSingleton.getInstance();
 		ClockSingleton clock = ClockSingleton.getInstance();
 
@@ -24,6 +26,7 @@ public class Demo {
 					clock.update();
 					System.out.println("Updating at: " + clock.getCurrentTimeString());
 					trnModSin.update();
+					trnCtrlSin.update();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

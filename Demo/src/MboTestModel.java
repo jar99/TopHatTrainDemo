@@ -29,4 +29,10 @@ public class MboTestModel implements MBOInterface {
 		trainMod.setTrainSuggestedSpeed(id, suggestespeed);
 	}
 
+	@Override
+	public void createTrain(TrackLine trackLine) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
