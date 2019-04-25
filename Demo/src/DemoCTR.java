@@ -298,7 +298,7 @@ public class DemoCTR implements Initializable {
 		
 		beaconData = new TableRow<String>("Beacon", "N/A");	
 
-		info_table.getItems().addAll(trainid, beaconData, passengersDelta, passengersOn, passengersOff, angle, speedLimit,
+		info_table.getItems().addAll(trainid, beaconData, passengersDelta, passengersOn, passengersOff, mode, angle, speedLimit,
 				trackSuggestedSpeed, trackAuth, MBOSuggestedSpeed, MBOAuth);
 	}
 
