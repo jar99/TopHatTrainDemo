@@ -75,7 +75,7 @@ public class TrackTestModel implements TrackModelInterface {
 
 	@Override
 	public int stationPassengerExchange(int trainID, int currentPassengers, int capacity) {
-		// Need to return the new value of passangers
+		// Need to return the new value of passengers
 		int offSum = currentPassengers - offPassengers; // Should give a value
 		if (offSum < 0) {
 			int delta = offPassengers + offSum;
@@ -92,7 +92,7 @@ public class TrackTestModel implements TrackModelInterface {
 			offPassengers = 0;
 
 		}
-		TrainLogger.infoS("Train passangers " + currentPassengers + " " + capacity + " off " + offSum + " "
+		TrainLogger.infoS("Train passengers " + currentPassengers + " " + capacity + " off " + offSum + " "
 				+ offPassengers + " ");
 
 		int onSum = currentPassengers + onPassengers;
@@ -114,7 +114,7 @@ public class TrackTestModel implements TrackModelInterface {
 		}
 
 		TrainLogger.infoS(
-				"Train passangers " + currentPassengers + " " + capacity + " on " + onSum + " " + onPassengers + " ");
+				"Train passengers " + currentPassengers + " " + capacity + " on " + onSum + " " + onPassengers + " ");
 
 		return currentPassengers;
 	}
@@ -269,12 +269,12 @@ public class TrackTestModel implements TrackModelInterface {
 		this.isStation = value;
 	}
 
-	public void addPassangersOn(int passangers) {
-		this.onPassengers += passangers;
+	public void addPassengersOn(int passengers) {
+		this.onPassengers += passengers;
 	}
 
-	public void addPassangersOff(int passangers) {
-		this.offPassengers += passangers;
+	public void addPassengersOff(int passengers) {
+		this.offPassengers += passengers;
 	}
 
 	@Override

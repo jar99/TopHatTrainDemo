@@ -136,7 +136,7 @@ public class DemoCTR implements Initializable {
 	TextField track_passanger_off;
 
 	@FXML
-	Label passangers;
+	Label passengers;
 
 	@FXML
 	ToggleButton track_is_station;
@@ -152,13 +152,13 @@ public class DemoCTR implements Initializable {
 	@FXML
 	Label location;
 
-	private TableRow<Integer> passangersDelta;
+	private TableRow<Integer> passengersDelta;
 
 	private TableRow<String> trainid;
 
-	private TableRow<Integer> passangersOn;
+	private TableRow<Integer> passengersOn;
 
-	private TableRow<Integer> passangersOff;
+	private TableRow<Integer> passengersOff;
 
 	private TableRow<Double> angle;
 
@@ -282,9 +282,9 @@ public class DemoCTR implements Initializable {
 
 	private void setupTable() {
 		trainid = new TableRow<String>("Train ID", "N/A");
-		passangersDelta = new TableRow<Integer>("Passangers Diff", 0, (a) -> Converters.PassangerFormat(a));
-		passangersOn = new TableRow<Integer>("Passangers On", 0, (a) -> Converters.PassangerFormat(a));
-		passangersOff = new TableRow<Integer>("Passangers Off", 0, (a) -> Converters.PassangerFormat(a));
+		passengersDelta = new TableRow<Integer>("Passengers Diff", 0, (a) -> Converters.PassangerFormat(a));
+		passengersOn = new TableRow<Integer>("Passengers On", 0, (a) -> Converters.PassangerFormat(a));
+		passengersOff = new TableRow<Integer>("Passengers Off", 0, (a) -> Converters.PassangerFormat(a));
 
 		angle = new TableRow<Double>("Angle", 0.0);
 		speedLimit = new TableRow<Double>("Speed Limit", 0.0, (a) -> Converters.SpeedConverter(a));
@@ -298,7 +298,7 @@ public class DemoCTR implements Initializable {
 		
 		beaconData = new TableRow<String>("Beacon", "N/A");	
 
-		info_table.getItems().addAll(trainid, beaconData, passangersDelta, passangersOn, passangersOff, angle, speedLimit,
+		info_table.getItems().addAll(trainid, beaconData, passengersDelta, passengersOn, passengersOff, angle, speedLimit,
 				trackSuggestedSpeed, trackAuth, MBOSuggestedSpeed, MBOAuth);
 	}
 
@@ -456,22 +456,22 @@ public class DemoCTR implements Initializable {
 	}
 
 	@FXML
-	private void set_passangers_on(ActionEvent e) {
-		String passangers_on = track_passanger_on.getText();
-		if (!passangers_on.isEmpty()) {
-			int passangers = Integer.parseInt(passangers_on);
+	private void set_passengers_on(ActionEvent e) {
+		String passengers_on = track_passanger_on.getText();
+		if (!passengers_on.isEmpty()) {
+			int passengers = Integer.parseInt(passengers_on);
 			track_passanger_on.clear();
-			track.addPassangersOn(passangers);
+			track.addPassengersOn(passengers);
 		}
 	}
 
 	@FXML
-	private void set_passangers_off(ActionEvent e) {
-		String passangers_off = track_passanger_off.getText();
-		if (!passangers_off.isEmpty()) {
-			int passangers = Integer.parseInt(passangers_off);
+	private void set_passengers_off(ActionEvent e) {
+		String passengers_off = track_passanger_off.getText();
+		if (!passengers_off.isEmpty()) {
+			int passengers = Integer.parseInt(passengers_off);
 			track_passanger_off.clear();
-			track.addPassangersOff(passangers);
+			track.addPassengersOff(passengers);
 		}
 	}
 
@@ -561,16 +561,16 @@ public class DemoCTR implements Initializable {
 			}
 			mode.update(TrainModelSingleton.isCTCMode());
 			
-			passangersDelta.update(track.getPassangerDiff());
-			passangersOn.update(track.getPassangerOn());
-			passangersOff.update(track.getPassangerOff());
+			passengersDelta.update(track.getPassangerDiff());
+			passengersOn.update(track.getPassangerOn());
+			passengersOff.update(track.getPassangerOff());
 		}
 
 		if (train == null)
 			return;
 
 		train_ctr_emergency.setSelected(train.getEmergencyBrake());
-		passangers.setText(String.format("%d", track.getPassangerDiff()));
+		passengers.setText(String.format("%d", track.getPassangerDiff()));
 
 	}
 

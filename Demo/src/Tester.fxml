@@ -17,11 +17,11 @@
       <Label layoutX="25.0" layoutY="233.0" text="Grade" />
       <Label layoutX="371.0" layoutY="261.0" text="Beacon" />
       <ToggleButton fx:id="has_beacon" layoutX="362.0" layoutY="220.0" mnemonicParsing="false" onAction="#update_beacon_data" text="Has Beacon" />
-      <Label layoutX="361.0" layoutY="291.0" text="Passangers On" />
-      <TextField fx:id="track_passanger_on" layoutX="363.0" layoutY="312.0" onAction="#set_passangers_on" />
+      <Label layoutX="361.0" layoutY="291.0" text="passengers On" />
+      <TextField fx:id="track_passanger_on" layoutX="363.0" layoutY="312.0" onAction="#set_passengers_on" />
       <ToggleButton fx:id="track_is_station" layoutX="538.0" layoutY="312.0" mnemonicParsing="false" onAction="#track_set_station" text="Is Station" />
-      <TextField fx:id="track_passanger_off" layoutX="363.0" layoutY="360.0" onAction="#set_passangers_off" />
-      <Label layoutX="361.0" layoutY="339.0" text="Passangers OFF" />
+      <TextField fx:id="track_passanger_off" layoutX="363.0" layoutY="360.0" onAction="#set_passengers_off" />
+      <Label layoutX="361.0" layoutY="339.0" text="passengers OFF" />
       <Label layoutX="25.0" layoutY="260.0" text="Speed Limit" />
       <TextField fx:id="track_speed_limit" layoutX="100.0" layoutY="255.0" onAction="#update_track_data" />
       <TextField fx:id="track_speed" layoutX="100.0" layoutY="291.0" onAction="#change_track_data" />
@@ -58,8 +58,8 @@
       <Button layoutX="146.0" layoutY="160.0" mnemonicParsing="false" onAction="#time_set" text="Set Time Scale" />
       <Button layoutX="269.0" layoutY="51.0" mnemonicParsing="false" onAction="#remove_train" text="Remove Train" />
       <Button layoutX="25.0" layoutY="347.0" mnemonicParsing="false" onAction="#send_mbo_data" text="Send Data" />
-      <Label layoutX="360.0" layoutY="397.0" text="Total Passangers" />
-      <Label fx:id="passangers" layoutX="475.0" layoutY="397.0" text="passangers" />
+      <Label layoutX="360.0" layoutY="397.0" text="Total passengers" />
+      <Label fx:id="passengers" layoutX="475.0" layoutY="397.0" text="passengers" />
       <TextField fx:id="train_ctr_temperature" layoutX="463.0" layoutY="187.0" onAction="#update_train_temperature" />
       <Label layoutX="383.0" layoutY="192.0" text="Temperature" />
       <ToggleButton fx:id="mbo_mode" layoutX="269.0" layoutY="84.0" mnemonicParsing="false" onAction="#set_mode" text="MBO Mode" />
