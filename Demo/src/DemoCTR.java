@@ -6,6 +6,7 @@ import application.TrackModel.SwitchStateException;
 import application.TrackModel.TrackCircuitFailureException;
 import application.TrainController.TrainControllerSingleton;
 import application.TrainModel.TrainInterface;
+import application.TrainModel.TrainModelInterface;
 import application.TrainModel.TrainModelSingleton;
 import application.TrainModel.UI.Converters;
 import application.TrainModel.UI.TableRow;
@@ -147,6 +148,9 @@ public class DemoCTR implements Initializable {
 
 	@FXML
 	TextField mbo_speed;
+	
+	@FXML
+	Label location;
 
 	private TableRow<Integer> passangersDelta;
 
@@ -170,8 +174,10 @@ public class DemoCTR implements Initializable {
 
 	private TableRow<String> beaconData;
 
+	private TableRow<Boolean> mode;
+
 	@FXML
-	private void set_mbo_mode(ActionEvent e) {
+	private void set_mode(ActionEvent e) {
 		if(mbo_mode.isSelected()) {
 			TrainModelSingleton.setMode(false);
 		}else {
@@ -287,6 +293,8 @@ public class DemoCTR implements Initializable {
 
 		MBOSuggestedSpeed = new TableRow<Double>("MBO Speed", 0.0, (a) -> Converters.SpeedConverter(a));
 		MBOAuth = new TableRow<Integer>("MBO Auth", 0);
+		
+		mode = new TableRow<Boolean>("Is CTC Mode", TrainModelSingleton.isCTCMode() , (a) -> Converters.YesOrNo(a));
 		
 		beaconData = new TableRow<String>("Beacon", "N/A");	
 
@@ -535,8 +543,11 @@ public class DemoCTR implements Initializable {
 		time.setText(clock.getCurrentTimeString());
 
 		if (info_table.isVisible()) {
+			
 			if (train != null) {
 				trainid.update(train.toString());
+				TrainModelInterface in = TrainModelSingleton.getInstance();
+				location.setText(String.format("[%.3f, %.3f]", in.getXcord(train.getID()), in.getYcord(train.getID())));
 				try {
 					trackAuth.update(track.getTrainBlockAuthority(train.getID()));
 					trackSuggestedSpeed.update(track.getTrainSuggestedSpeed(train.getID()));
@@ -546,7 +557,9 @@ public class DemoCTR implements Initializable {
 				}
 			} else {
 				trainid.update("N/A");
+				location.setText("N/A");
 			}
+			mode.update(TrainModelSingleton.isCTCMode());
 			
 			passangersDelta.update(track.getPassangerDiff());
 			passangersOn.update(track.getPassangerOn());
