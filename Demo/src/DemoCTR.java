@@ -538,6 +538,16 @@ public class DemoCTR implements Initializable {
 				.addListener((ObservableValue<? extends TrainInterface> observable, TrainInterface oldValue,
 						TrainInterface newValue) -> selectTrain(oldValue, newValue));
 	}
+	
+	private void updateTrack(int id) {
+		try {
+			trackAuth.update(track.getTrainBlockAuthority(id));
+			trackSuggestedSpeed.update(track.getTrainSuggestedSpeed(id));
+		} catch (TrackCircuitFailureException e) {
+			trackAuth.update(Integer.MIN_VALUE);
+			trackSuggestedSpeed.update(Double.NaN);
+		}
+	}
 
 	private void update() {
 		time.setText(clock.getCurrentTimeString());
@@ -546,20 +556,18 @@ public class DemoCTR implements Initializable {
 			
 			if (train != null) {
 				trainid.update(train.toString());
+				updateTrack(train.getID());
+				
 				TrainModelInterface in = TrainModelSingleton.getInstance();
 				location.setText(String.format("[%.3f, %.3f]", in.getXcord(train.getID()), in.getYcord(train.getID())));
 			} else {
+				
+				updateTrack(0);
 				trainid.update("N/A");
 				location.setText("N/A");
 			}
 			
-			try {
-				trackAuth.update(track.getTrainBlockAuthority(train.getID()));
-				trackSuggestedSpeed.update(track.getTrainSuggestedSpeed(train.getID()));
-			} catch (TrackCircuitFailureException e) {
-				trackAuth.update(Integer.MIN_VALUE);
-				trackSuggestedSpeed.update(Double.NaN);
-			}
+			
 			
 			mode.update(TrainModelSingleton.isCTCMode());
 			
