@@ -346,15 +346,15 @@ public class DemoCTR implements Initializable {
 			speed = Double.parseDouble(speed_s);
 		}
 
-		if (train == null) {
+//		if (train == null) {
 			track.setAuth(auth);
 			track.setSpeed(speed);
-			return;
-		}
+//			return;
+//		}
 			
-		TrainLogger.infoS("DemoCTRL", "Track Speed: " + speed);
-		track.setAuth(train.getID(), auth);
-		track.setSpeed(train.getID(), speed);
+//		TrainLogger.infoS("DemoCTRL", "Track Speed: " + speed);
+//		track.setAuth(train.getID(), auth);
+//		track.setSpeed(train.getID(), speed);
 
 	}
 
@@ -548,17 +548,19 @@ public class DemoCTR implements Initializable {
 				trainid.update(train.toString());
 				TrainModelInterface in = TrainModelSingleton.getInstance();
 				location.setText(String.format("[%.3f, %.3f]", in.getXcord(train.getID()), in.getYcord(train.getID())));
-				try {
-					trackAuth.update(track.getTrainBlockAuthority(train.getID()));
-					trackSuggestedSpeed.update(track.getTrainSuggestedSpeed(train.getID()));
-				} catch (TrackCircuitFailureException e) {
-					trackAuth.update(Integer.MIN_VALUE);
-					trackSuggestedSpeed.update(Double.NaN);
-				}
 			} else {
 				trainid.update("N/A");
 				location.setText("N/A");
 			}
+			
+			try {
+				trackAuth.update(track.getTrainBlockAuthority(train.getID()));
+				trackSuggestedSpeed.update(track.getTrainSuggestedSpeed(train.getID()));
+			} catch (TrackCircuitFailureException e) {
+				trackAuth.update(Integer.MIN_VALUE);
+				trackSuggestedSpeed.update(Double.NaN);
+			}
+			
 			mode.update(TrainModelSingleton.isCTCMode());
 			
 			passengersDelta.update(track.getPassangerDiff());

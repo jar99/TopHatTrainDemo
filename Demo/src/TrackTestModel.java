@@ -182,12 +182,14 @@ public class TrackTestModel implements TrackModelInterface {
 	public double getTrainSuggestedSpeed(int trainID) throws TrackCircuitFailureException {
 		if (hasRailFault)
 			throw new TrackCircuitFailureException("Track Circuit is Failing");
-		if (!trainS.containsKey(trainID))
-			throw new IllegalArgumentException("Train: " + trainID + " not found");
+//		if (!trainS.containsKey(trainID))
+//			throw new IllegalArgumentException("Train: " + trainID + " not found");
+//		
+//		TrackTrainTest t = trainS.get(trainID);
+//		
+//		return t.getSpeed();
 		
-		TrackTrainTest t = trainS.get(trainID);
-		
-		return t.getSpeed();
+		return speed;
 	}
 
 	@Override
@@ -195,12 +197,13 @@ public class TrackTestModel implements TrackModelInterface {
 		if (hasRailFault)
 			throw new TrackCircuitFailureException("Track Circuit is Failing");
 		
-		if (!trainS.containsKey(trainID))
-			throw new IllegalArgumentException("Train: " + trainID + " not found");
-		
-		TrackTrainTest t = trainS.get(trainID);
-		
-		return t.getAuth();
+//		if (!trainS.containsKey(trainID))
+//			throw new IllegalArgumentException("Train: " + trainID + " not found");
+//		
+//		TrackTrainTest t = trainS.get(trainID);
+//		
+//		return t.getAuth();
+		return auth;
 	}
 
 	@Override
