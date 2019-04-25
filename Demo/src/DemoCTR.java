@@ -348,7 +348,7 @@ public class DemoCTR implements Initializable {
 
 //		if (train == null) {
 			track.setAuth(auth);
-			track.setSpeed(speed);
+			track.setSpeed(Converters.kmhToms(speed));
 //			return;
 //		}
 			
@@ -434,8 +434,8 @@ public class DemoCTR implements Initializable {
 			train.toggleLeftDoors();
 		if (train.getRightDoorState() != train_ctr_right.isSelected())
 			train.toggleRightDoors();
-		if (train.getInterierLightState() != train_ctr_inLight.isSelected())
-			train.toggleInterierLight();
+		if (train.getInteriorLightState() != train_ctr_inLight.isSelected())
+			train.toggleInteriorLight();
 		if (train.getLightState() != train_ctr_outLight.isSelected())
 			train.toggleLights();
 
