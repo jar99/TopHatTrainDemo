@@ -95,6 +95,9 @@ public class DemoCTR implements Initializable {
 
 	@FXML
 	ToggleButton train_ctr_outLight;
+	
+	@FXML
+	ToggleButton mbo_mode;
 
 	TrackTestModel track = new TrackTestModel();
 
@@ -168,6 +171,15 @@ public class DemoCTR implements Initializable {
 	private TableRow<String> beaconData;
 
 	@FXML
+	private void set_mbo_mode(ActionEvent e) {
+		if(mbo_mode.isSelected()) {
+			TrainModelSingleton.setMode(false);
+		}else {
+			TrainModelSingleton.setMode(true);
+		}
+	}
+	
+	@FXML
 	private void pause(ActionEvent e) {
 		if (time_pause.isSelected()) {
 			clock.setRatio(0);
@@ -176,6 +188,8 @@ public class DemoCTR implements Initializable {
 		}
 	}
 
+	
+	
 	@FXML
 	private void time_set(ActionEvent e) {
 		set_time_scale();
