@@ -294,7 +294,7 @@ public class DemoCTR implements Initializable {
 		MBOSuggestedSpeed = new TableRow<Double>("MBO Speed", 0.0, (a) -> Converters.SpeedConverter(a));
 		MBOAuth = new TableRow<Integer>("MBO Auth", 0);
 		
-		mode = new TableRow<Boolean>("Is CTC Mode", TrainModelSingleton.isCTCMode() , (a) -> Converters.YesOrNo(a));
+		mode = new TableRow<Boolean>("Is CTC Mode", TrainModelSingleton.isCTCModeS() , (a) -> Converters.YesOrNo(a));
 		
 		beaconData = new TableRow<String>("Beacon", "N/A");	
 
@@ -569,7 +569,7 @@ public class DemoCTR implements Initializable {
 			
 			
 			
-			mode.update(TrainModelSingleton.isCTCMode());
+			mode.update(TrainModelSingleton.isCTCModeS());
 			
 			passengersDelta.update(track.getPassangerDiff());
 			passengersOn.update(track.getPassangerOn());
