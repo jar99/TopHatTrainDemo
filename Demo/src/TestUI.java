@@ -17,7 +17,7 @@ public class TestUI extends Application {
 	public static final CountDownLatch latch = new CountDownLatch(1);
 	public static TestUI uiApp = null;
 
-	private void makeWindow(String path, String title, int width, int height) {
+	public void makeWindow(String path, String title, int width, int height) {
 		try {
 			Stage trnModStage = new Stage();
 //			Code to close all windows if one window closese
@@ -44,13 +44,15 @@ public class TestUI extends Application {
 		}
 	}
 
+	
+	
 	@Override
 	public void start(Stage ctcStage) {
 	
 		makeWindow("./Tester.fxml", "Train Tester", 400, 400);
 		makeWindow("./application/TrainModel/TrainModel.fxml", "Train Model", 400, 400);
 		
-		if(Demo.trainControllerEnable) makeWindow("./application/TrainController/TrainController.fxml", "Train Controller", 650, 500);
+//		if(Demo.trainControllerEnable) makeWindow("./application/TrainController/TrainController.fxml", "Train Controller", 650, 500);
 		
 
 	}

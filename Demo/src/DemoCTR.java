@@ -416,6 +416,19 @@ public class DemoCTR implements Initializable {
 	}
 	
 	@FXML
+	private void launch_train() {
+		
+		Demo.setTrinControllerValue(true);
+		TestUI.uiApp.makeWindow("./application/TrainController/TrainController.fxml", "Train Controller", 650, 500);
+		TrainControllerSingleton trnCtrl = TrainControllerSingleton.getInstance();
+		TrainModelSingleton trainSin = TrainModelSingleton.getInstance();
+		for(Integer trainID: trainSin.getAllTrainIDs()) {
+			trnCtrl.createTrain(trainID, trainSin.getTrain(trainID)); // Create this method.
+		}
+		
+	}
+	
+	@FXML
 	private void update_train_temperature(ActionEvent e) {
 		if (train == null)
 			return;

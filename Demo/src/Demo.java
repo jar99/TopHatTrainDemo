@@ -10,7 +10,11 @@ import application.TrainModel.UI.TrainLogger;
 
 public class Demo {
 
-	protected static final boolean trainControllerEnable = true;
+	protected static boolean trainControllerEnable = false;
+	
+	public static void setTrinControllerValue(boolean value) {
+		trainControllerEnable = value;
+	}
 
 	public static void main(String[] args) {
 		TrainLogger.enableS();
